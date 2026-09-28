@@ -1,0 +1,9 @@
+{
+  "slug": "shipyard",
+  "fresh_venv": "work/clean-envs/shipyard",
+  "fresh_checkout": "work/clean/shipyard",
+  "passed": true,
+  "failure": null,
+  "runtime": "Python 3.12.14",
+  "model_training": null
+}

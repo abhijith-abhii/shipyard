@@ -1,0 +1,31 @@
+name: Container delivery
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  verify-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - run: python -m pytest -q
+      - run: docker build -t shipyard:${{ github.sha }} .
+      - name: Deploy to temporary CI container
+        run: docker run -d --name shipyard --read-only --tmpfs /tmp --cap-drop ALL -e APP_VERSION=${{ github.sha }} -p 127.0.0.1:8080:8080 shipyard:${{ github.sha }}
+      - run: python smoke.py
+      - name: Confirm non-root runtime
+        run: test "$(docker exec shipyard id -u)" = "10001"
+      - name: Capture evidence
+        if: always()
+        run: docker logs shipyard > container.log 2>&1 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: container-evidence
+          path: container.log
+      - if: always()
+        run: docker rm -f shipyard || true

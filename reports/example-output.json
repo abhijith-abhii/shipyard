@@ -1,0 +1,14 @@
+{
+  "answer": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+  "details": {
+    "algorithm": "SHA-256",
+    "encoding": "UTF-8",
+    "purpose": "integrity fingerprint; not password hashing",
+    "release": "local-dev"
+  },
+  "metrics": {
+    "Lines": 1,
+    "Release": "local-dev",
+    "UTF-8 bytes": 5
+  }
+}
