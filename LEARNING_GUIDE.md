@@ -23,11 +23,15 @@ Follow the README installation block, then: Run docker compose up --build, open 
 
 ## Five interview questions
 
-1. **What problem does this project solve, and what is its unit of work?** Explain ship a health-checked service through ci, identify junior platform engineers as the audience, and trace one concrete example through the files above. Use the demonstration output rather than hypothetical impact.
-2. **Why did you choose the first design decision?** Package a deterministic API with a non-root runtime and read-only container filesystem. Show the corresponding implementation and a test that would fail if that property were removed.
-3. **How do you protect correctness when inputs or execution change?** CI runs unit tests before building, then starts a real temporary container and checks readiness plus a known digest. Explain the relevant invalid-input or edge-case test and distinguish a checked property from an untested assumption.
-4. **How do you make results inspectable and reproducible?** Keep rollback instructions explicit and retain prior image tags rather than assuming deployment success. Point to actual outputs and recorded commands. Explain why a successful example is weaker evidence than a tested boundary or independently reconciled total.
-5. **What would you improve before real deployment or real-data use?** The delivery target is an ephemeral CI container or local Docker Compose. No public service, registry publishing, TLS, zero-downtime rollout or production traffic is configured. Docker image base tags are versioned but not digest-pinned. Choose one limitation, describe the missing evidence, and propose a measurable acceptance check rather than promising production readiness.
+1. **What does the delivery pipeline deploy?** It builds the project image and launches a temporary container inside the CI runner. The container is removed afterward; this is not a continuously hosted public service.
+
+2. **How is the runtime constrained?** The image uses a non-root user. The run drops Linux capabilities, makes the root filesystem read-only and grants a temporary writable directory only where needed.
+
+3. **What do smoke checks prove?** The service responds to its health endpoint and its main fingerprint workflow. This verifies basic operation of the built image, not sustained capacity or production reliability.
+
+4. **Why identify images by commit?** A commit-specific tag connects the tested application to its source revision. A mutable latest tag would make reproducing a particular release more ambiguous.
+
+5. **What is the rollback limitation?** The documented process can select a prior image, but there is no production orchestrator or live traffic cutover in this project. No zero-downtime rollback claim is made.
 
 ## Independent exercise
 
@@ -41,6 +45,6 @@ The implementation was developed with substantial AI assistance under Abhijith V
 
 Suggested factual bullet after personally validating the demo:
 
-- Implemented and validated ship a health-checked service through ci using Docker · GitHub Actions · Flask, with container build and documented correctness checks and limitations.
+- Delivered a non-root containerized service through GitHub Actions, with a read-only runtime, health and functional smoke checks, and captured temporary-deployment evidence.
 
 Use [VERIFICATION.md](VERIFICATION.md) to add only measured numbers. Do not claim production traffic, users, savings, upstream acceptance or cloud deployment without corresponding evidence.
