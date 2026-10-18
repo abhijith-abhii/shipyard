@@ -72,3 +72,7 @@ This implementation and documentation were developed with substantial Codex assi
 ## Local performance measurements
 
 An 8-client local HTTP workload completed **2,400 validated requests**, with **9.924 ms p95 latency**. These are synthetic local measurements, not production users or service guarantees. See the [workload, reproducible script and complete results](benchmarks/README.md).
+
+## Connect
+
+[LinkedIn — Abhijith Viswanathan](https://www.linkedin.com/in/abhijith-viswanathan-0a7216436/)
