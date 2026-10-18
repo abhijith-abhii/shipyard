@@ -1,0 +1,61 @@
+{
+  "date_utc": "2026-10-18T10:36:25.344516+00:00",
+  "project": "shipyard",
+  "source_commit": "9a958a58d26ea49908fb62870420ec32ae1a0f07",
+  "environment": {
+    "os": "Darwin",
+    "os_release": "25.2.0",
+    "architecture": "arm64",
+    "python": "3.12.14",
+    "cpu_count": 12,
+    "server": "Gunicorn 23.0.0, 1 gthread worker, 8 threads"
+  },
+  "scope": "Synthetic local loopback HTTP benchmark. Not production capacity, real users, clinical validation or user growth.",
+  "concurrency": 8,
+  "requests_per_round": 800,
+  "rounds": 3,
+  "warmup_requests": 40,
+  "workload": "POST /api/run SHA-256 fingerprints of 100000 ASCII characters; digest correctness checked. Native Gunicorn process, not a Docker benchmark.",
+  "http_rounds": [
+    {
+      "count": 800,
+      "median_ms": 6.517,
+      "p95_ms": 9.72,
+      "min_ms": 0.779,
+      "max_ms": 15.462,
+      "elapsed_seconds": 0.689,
+      "requests_per_second": 1160.77,
+      "failed_requests": 0
+    },
+    {
+      "count": 800,
+      "median_ms": 6.352,
+      "p95_ms": 9.743,
+      "min_ms": 0.785,
+      "max_ms": 15.859,
+      "elapsed_seconds": 0.678,
+      "requests_per_second": 1179.46,
+      "failed_requests": 0
+    },
+    {
+      "count": 800,
+      "median_ms": 6.535,
+      "p95_ms": 10.361,
+      "min_ms": 0.843,
+      "max_ms": 14.853,
+      "elapsed_seconds": 0.697,
+      "requests_per_second": 1148.02,
+      "failed_requests": 0
+    }
+  ],
+  "http_summary": {
+    "count": 2400,
+    "median_ms": 6.466,
+    "p95_ms": 9.924,
+    "min_ms": 0.779,
+    "max_ms": 15.859,
+    "median_round_requests_per_second": 1160.77,
+    "failed_requests": 0,
+    "total_measured_requests": 2400
+  }
+}

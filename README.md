@@ -68,3 +68,7 @@ Suggested extension: Add a readiness dependency that can intentionally fail, and
 ## Honest portfolio use
 
 This implementation and documentation were developed with substantial Codex assistance. Before presenting it, run the demonstration, explain the design choices, and complete the suggested independent modification. Do not describe generated code as work experience, an accepted upstream contribution, or a deployed production service.
+
+## Local performance measurements
+
+An 8-client local HTTP workload completed **2,400 validated requests**, with **9.924 ms p95 latency**. These are synthetic local measurements, not production users or service guarantees. See the [workload, reproducible script and complete results](benchmarks/README.md).
